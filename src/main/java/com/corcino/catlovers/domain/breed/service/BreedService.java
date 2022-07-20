@@ -1,6 +1,8 @@
 package com.corcino.catlovers.domain.breed.service;
 
 import com.corcino.catlovers.domain.breed.dto.BreedResponse;
+import com.corcino.catlovers.error.exception.BadRequestException;
+import com.corcino.catlovers.error.exception.UnauthorizedException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,10 +44,10 @@ public class BreedService {
         catch(HttpClientErrorException e) {
             if (HttpStatus.UNAUTHORIZED.equals(e.getStatusCode())) {
                 log.error("voce precisa enviar sua API Key como 'x-api-key' no header");
-                throw new Exception("voce precisa enviar sua API Key como 'x-api-key' no header");
+                throw new UnauthorizedException("voce precisa enviar sua API Key como 'x-api-key' no header");
             }
             log.error("Erro ao acessar thecatapi.com/v1/breeds - " + e.getMessage());
-            throw new Exception("Erro ao acessar thecatapi.com/v1/breeds - " + e.getMessage());
+            throw new BadRequestException("Erro ao acessar thecatapi.com/v1/breeds - " + e.getMessage());
         }
         catch (Exception e) {
             log.error("Erro ao acessar thecatapi.com/v1/breeds");
