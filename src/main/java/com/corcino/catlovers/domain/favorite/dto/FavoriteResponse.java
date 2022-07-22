@@ -1,4 +1,4 @@
-package com.corcino.catlovers.domain.vote.dto;
+package com.corcino.catlovers.domain.favorite.dto;
 
 import com.corcino.catlovers.domain.breed.dto.BreedResponse;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class VoteResponse {
+public class FavoriteResponse {
 
-    private Long voteId;
+    private Long favoriteId;
     private Integer value;
     private BreedResponse breed;
 

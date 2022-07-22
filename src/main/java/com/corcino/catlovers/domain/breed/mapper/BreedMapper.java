@@ -1,7 +1,7 @@
 package com.corcino.catlovers.domain.breed.mapper;
 
 import com.corcino.catlovers.domain.breed.dto.BreedResponse;
-import com.corcino.catlovers.domain.vote.model.Breed;
+import com.corcino.catlovers.domain.favorite.model.Breed;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
