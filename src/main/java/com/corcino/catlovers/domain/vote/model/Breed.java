@@ -1,14 +1,14 @@
-package com.corcino.catlovers.domain.breed.dto;
+package com.corcino.catlovers.domain.vote.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
-@Data
-@JsonIgnoreProperties
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class BreedResponse {
+import javax.persistence.*;
 
+@Data
+@Entity
+public class Breed {
+
+    @Id
     private String id;
     private String name;
     private String cfa_url;
@@ -17,6 +17,8 @@ public class BreedResponse {
     private String temperament;
     private String origin;
     private String country_code;
+
+    @Column(length = 1024)
     private String description;
     private String life_span;
     private String lap;
@@ -30,6 +32,8 @@ public class BreedResponse {
     private Integer social_needs;
     private Integer stranger_friendly;
     private Integer rare;
-    private ImageResponse image;
+
+    @OneToOne(cascade= CascadeType.ALL, fetch = FetchType.LAZY)
+    private Image image;
 
 }

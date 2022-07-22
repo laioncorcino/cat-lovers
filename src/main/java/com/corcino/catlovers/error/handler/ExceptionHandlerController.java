@@ -41,13 +41,13 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
     public ResponseEntity<StandardError> handleNotFound(BadRequestException badRequestException) {
         StandardError error = StandardError.builder()
                 .title("Bad Request. Check documentation")
-                .status(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.BAD_REQUEST.value())
                 .errorMessage(badRequestException.getMessage())
                 .developerMessage(badRequestException.getClass().getName())
                 .dateTime(getDateTime())
                 .build();
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
     @ExceptionHandler(Exception.class)

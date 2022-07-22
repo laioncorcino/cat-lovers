@@ -1,6 +1,8 @@
 package com.corcino.catlovers.domain.breed.service;
 
 import com.corcino.catlovers.domain.breed.dto.BreedResponse;
+import com.corcino.catlovers.domain.breed.mapper.BreedMapper;
+import com.corcino.catlovers.domain.vote.model.Breed;
 import com.corcino.catlovers.error.exception.BadRequestException;
 import com.corcino.catlovers.error.exception.UnauthorizedException;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,7 @@ public class BreedService {
     private final RestTemplate restTemplate;
     private final String endpoint;
     private final String apiKey;
+    private final static BreedMapper mapper = BreedMapper.INSTANCE;
 
     public BreedService(@Qualifier("breedApiTemplate") RestTemplate restTemplate,
                         @Value("${breed.api.url}") String endpoint,
@@ -51,7 +54,7 @@ public class BreedService {
         }
         catch (Exception e) {
             log.error("Erro ao acessar thecatapi.com/v1/breeds");
-            throw new Exception("Erro ao acessar thecatapi.com/v1/breeds");
+            throw new Exception("Erro ao acessar thecatapi.com/v1/breeds - " + e.getMessage());
         }
     }
 
@@ -67,6 +70,17 @@ public class BreedService {
         headers.set("Accept", MediaType.APPLICATION_JSON.toString());
         headers.set("x-api-key", apiKey);
         return new HttpEntity<>(headers);
+    }
+
+    public Breed findCatByBreedId(String breedId) throws Exception {
+        List<BreedResponse> breedResponses = listBreed(null);
+
+        BreedResponse breedResponse = breedResponses.stream()
+                .filter(breed -> breed.getId().equals(breedId))
+                .findFirst()
+                .orElseThrow(() -> new BadRequestException("raça desconhecida - " + breedId));
+
+        return mapper.toModel(breedResponse);
     }
 
 }
