@@ -22,7 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/breed")
-@Tag(name = "/api/v1/breed", description = "API's group for list cat breed")
+@Tag(name = "breed", description = "API for list cats breeds")
 public class BreedController {
 
     private final BreedService breedService;
