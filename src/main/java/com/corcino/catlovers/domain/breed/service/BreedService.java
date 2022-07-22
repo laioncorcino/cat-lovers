@@ -2,7 +2,7 @@ package com.corcino.catlovers.domain.breed.service;
 
 import com.corcino.catlovers.domain.breed.dto.BreedResponse;
 import com.corcino.catlovers.domain.breed.mapper.BreedMapper;
-import com.corcino.catlovers.domain.vote.model.Breed;
+import com.corcino.catlovers.domain.favorite.model.Breed;
 import com.corcino.catlovers.error.exception.BadRequestException;
 import com.corcino.catlovers.error.exception.UnauthorizedException;
 import lombok.extern.slf4j.Slf4j;
@@ -78,7 +78,10 @@ public class BreedService {
         BreedResponse breedResponse = breedResponses.stream()
                 .filter(breed -> breed.getId().equals(breedId))
                 .findFirst()
-                .orElseThrow(() -> new BadRequestException("raça desconhecida - " + breedId));
+                .orElseThrow(() -> {
+                    log.error("raca " + breedId + " desconhecida");
+                    return new BadRequestException("raca " + breedId + " desconhecida - " + "consulte http://localhost:8080/api/v1/breed");
+                });
 
         return mapper.toModel(breedResponse);
     }

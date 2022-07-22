@@ -1,4 +1,4 @@
-package com.corcino.catlovers.domain.vote.model;
+package com.corcino.catlovers.domain.favorite.model;
 
 import lombok.Data;
 
