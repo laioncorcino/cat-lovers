@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/breed")
+@RequestMapping("/api/v1/breed")
 @Tag(name = "/api/v1/breed", description = "API's group for list cat breed")
 public class BreedController {
 
