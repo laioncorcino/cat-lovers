@@ -1,5 +1,7 @@
 package com.corcino.catlovers.domain.favorite.service;
 
+import com.corcino.catlovers.domain.breed.dto.BreedResponse;
+import com.corcino.catlovers.domain.breed.mapper.BreedMapper;
 import com.corcino.catlovers.domain.breed.service.BreedService;
 import com.corcino.catlovers.domain.favorite.dto.FavoriteResponse;
 import com.corcino.catlovers.domain.favorite.dto.ListFavoriteResponse;
@@ -26,6 +28,7 @@ public class FavoriteService {
     private final BreedService breedService;
     private final FavoriteRepository favoriteRepository;
     private final static FavoriteMapper mapper = FavoriteMapper.INSTANCE;
+    private final static BreedMapper breed_mapper = BreedMapper.INSTANCE;
 
     @Autowired
     public FavoriteService(BreedService breedService, FavoriteRepository favoriteRepository) {
@@ -34,7 +37,8 @@ public class FavoriteService {
     }
 
     public Favorite registerFavorite(FavoriteRequest favoriteRequest) throws Exception {
-        Breed breed = breedService.findCatByBreedId(favoriteRequest.getBreedId());
+        BreedResponse breedResponse = breedService.findCatByBreedId(favoriteRequest.getBreedId());
+        Breed breed = breed_mapper.toModel(breedResponse);
         Favorite favorite = new Favorite(favoriteRequest.getValue(), breed);
         return saveFavorite(favorite);
     }

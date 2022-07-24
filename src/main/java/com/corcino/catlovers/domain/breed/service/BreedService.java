@@ -72,18 +72,16 @@ public class BreedService {
         return new HttpEntity<>(headers);
     }
 
-    public Breed findCatByBreedId(String breedId) throws Exception {
+    public BreedResponse findCatByBreedId(String breedId) throws Exception {
         List<BreedResponse> breedResponses = listBreed(null);
 
-        BreedResponse breedResponse = breedResponses.stream()
+        return breedResponses.stream()
                 .filter(breed -> breed.getId().equals(breedId))
                 .findFirst()
                 .orElseThrow(() -> {
                     log.error("raca " + breedId + " desconhecida");
                     return new BadRequestException("raca " + breedId + " desconhecida - " + "consulte http://localhost:8080/api/v1/breed");
                 });
-
-        return mapper.toModel(breedResponse);
     }
 
 }
