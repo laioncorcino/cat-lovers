@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -32,7 +33,21 @@ public class BreedService {
         this.apiKey = apiKey;
     }
 
-    public List<BreedResponse> listBreed(String name) throws Exception {
+    public List<BreedResponse> listBreed(String name, String temperament, String origin) throws Exception {
+        List<BreedResponse> breedResponses = listBaseBreed(name);
+
+        if (StringUtils.isNotBlank(temperament)) {
+            return filterBreedWithTemperament(breedResponses, temperament);
+        }
+
+        if (StringUtils.isNotBlank(origin)) {
+            return filterBreedWithOrigin(breedResponses, origin);
+        }
+
+        return breedResponses;
+    }
+
+    public List<BreedResponse> listBaseBreed(String name) throws Exception {
         String url = mountUrl(name);
 
         try {
@@ -69,8 +84,20 @@ public class BreedService {
         return new HttpEntity<>(headers);
     }
 
+    private List<BreedResponse> filterBreedWithTemperament(List<BreedResponse> list, String temperament) {
+        return list.stream()
+                .filter(breed -> breed.getTemperament().toLowerCase().contains(temperament.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    private List<BreedResponse> filterBreedWithOrigin(List<BreedResponse> list, String origin) {
+        return list.stream()
+                .filter(breed -> breed.getOrigin().toLowerCase().contains(origin.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
     public BreedResponse findCatByBreedId(String breedId) throws Exception {
-        List<BreedResponse> breedResponses = listBreed(null);
+        List<BreedResponse> breedResponses = listBaseBreed(null);
 
         return breedResponses.stream()
                 .filter(breed -> breed.getId().equals(breedId))

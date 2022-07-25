@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,14 +33,21 @@ public class BreedController {
     
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(description = "API to list breed")
-    @Parameters(value = { @Parameter(name = "name", in = ParameterIn.QUERY) })
+    @Parameters(value = {
+            @Parameter(name = "name", in = ParameterIn.QUERY),
+            @Parameter(name = "temperament", in = ParameterIn.QUERY),
+            @Parameter(name = "origin", in = ParameterIn.QUERY)
+    })
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Returned list successfully"),
             @ApiResponse(responseCode = "401", description = "Authentication error"),
             @ApiResponse(responseCode = "500", description = "Internal error server")
     })
-    public ResponseEntity<List<BreedResponse>> list(@RequestParam(required = false) String name) throws Exception {
-        List<BreedResponse> breedResponses = breedService.listBreed(name);
+    public ResponseEntity<List<BreedResponse>> list(@RequestParam(required = false) String name,
+                                                    @RequestParam(required = false) String temperament,
+                                                    @RequestParam(required = false) String origin) throws Exception {
+
+        List<BreedResponse> breedResponses = breedService.listBreed(name, temperament, origin);
         return ResponseEntity.ok(breedResponses);
     }
     

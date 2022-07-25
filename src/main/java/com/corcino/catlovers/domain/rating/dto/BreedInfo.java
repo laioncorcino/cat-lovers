@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class BreedResponse {
+public class BreedInfo {
 
     private String id;
     private String name;

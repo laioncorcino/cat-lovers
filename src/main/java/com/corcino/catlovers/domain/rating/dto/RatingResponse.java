@@ -22,7 +22,7 @@ public class RatingResponse {
     private Integer sociable;
 
     @JsonProperty("breed")
-    private BreedResponse breedDocument;
+    private BreedInfo breedDocument;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private LocalDateTime creationDate;
