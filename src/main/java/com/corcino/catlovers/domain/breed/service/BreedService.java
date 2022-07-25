@@ -1,8 +1,6 @@
 package com.corcino.catlovers.domain.breed.service;
 
 import com.corcino.catlovers.domain.breed.dto.BreedResponse;
-import com.corcino.catlovers.domain.breed.mapper.BreedMapper;
-import com.corcino.catlovers.domain.favorite.model.Breed;
 import com.corcino.catlovers.error.exception.BadRequestException;
 import com.corcino.catlovers.error.exception.UnauthorizedException;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +23,6 @@ public class BreedService {
     private final RestTemplate restTemplate;
     private final String endpoint;
     private final String apiKey;
-    private final static BreedMapper mapper = BreedMapper.INSTANCE;
 
     public BreedService(@Qualifier("breedApiTemplate") RestTemplate restTemplate,
                         @Value("${breed.api.url}") String endpoint,

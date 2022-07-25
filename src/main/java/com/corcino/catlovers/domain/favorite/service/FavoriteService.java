@@ -27,7 +27,7 @@ public class FavoriteService {
 
     private final BreedService breedService;
     private final FavoriteRepository favoriteRepository;
-    private final static FavoriteMapper mapper = FavoriteMapper.INSTANCE;
+    private final static FavoriteMapper favorite_mapper = FavoriteMapper.INSTANCE;
     private final static BreedMapper breed_mapper = BreedMapper.INSTANCE;
 
     @Autowired
@@ -60,7 +60,7 @@ public class FavoriteService {
 
     public FavoriteResponse getVote(Long voteId) {
         Favorite favorite = getFavoriteById(voteId);
-        return mapper.toResponse(favorite);
+        return favorite_mapper.toResponse(favorite);
     }
 
     private Favorite getFavoriteById(Long favoriteId) {

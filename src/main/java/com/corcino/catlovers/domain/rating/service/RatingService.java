@@ -3,11 +3,14 @@ package com.corcino.catlovers.domain.rating.service;
 import com.corcino.catlovers.domain.breed.dto.BreedResponse;
 import com.corcino.catlovers.domain.breed.mapper.BreedMapper;
 import com.corcino.catlovers.domain.breed.service.BreedService;
+import com.corcino.catlovers.domain.rating.mapper.RatingMapper;
 import com.corcino.catlovers.domain.rating.dto.RatingRequest;
+import com.corcino.catlovers.domain.rating.dto.RatingResponse;
 import com.corcino.catlovers.domain.rating.model.BreedDocument;
 import com.corcino.catlovers.domain.rating.model.RatingDocument;
 import com.corcino.catlovers.domain.rating.repository.RatingRepository;
 import com.corcino.catlovers.error.exception.BadRequestException;
+import com.corcino.catlovers.error.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,7 @@ public class RatingService {
     private final BreedService breedService;
     private final RatingRepository ratingRepository;
     private final static BreedMapper breed_mapper = BreedMapper.INSTANCE;
+    private final static RatingMapper rating_mapper = RatingMapper.INSTANCE;
 
     @Autowired
     public RatingService(BreedService breedService, RatingRepository ratingRepository) {
@@ -54,6 +58,26 @@ public class RatingService {
         }
     }
 
+    public RatingResponse getRating(String ratingId) {
+        RatingDocument rating = getRatingById(ratingId);
+        return rating_mapper.toResponse(rating);
+    }
 
+    private RatingDocument getRatingById(String ratingId) {
+        log.info("Buscando rating de id {}", ratingId);
+
+        Optional<RatingDocument> rating = ratingRepository.findById(ratingId);
+
+        return rating.orElseThrow(() -> {
+            log.error("Rating de id {} nao encontrado", ratingId);
+            return new NotFoundException("Rating nao encontrado");
+        });
+    }
+
+    public void deleteRating(String ratingId) {
+        RatingDocument rating = getRatingById(ratingId);
+        log.info("Deletando rating de id {}", rating.getRatingId());
+        ratingRepository.deleteById(ratingId);
+    }
 
 }
