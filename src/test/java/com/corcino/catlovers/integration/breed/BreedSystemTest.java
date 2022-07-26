@@ -78,21 +78,13 @@ public class BreedSystemTest extends BreedInfraTest {
         assertThat(body.size()).isEqualTo(3);
 
         assertTrue(body.stream().allMatch(breed -> breed.getOrigin().toLowerCase().contains("egypt")));
+        assertTrue(body.stream().allMatch(breed -> breed.getCountry_code().equals("EG")));
+
+        assertTrue(body.stream().anyMatch(breed -> breed.getName().equals("Abyssinian")));
+        assertTrue(body.stream().anyMatch(breed -> breed.getName().equals("Chausie")));
+        assertTrue(body.stream().anyMatch(breed -> breed.getName().equals("Egyptian Mau")));
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
