@@ -37,7 +37,7 @@ public class FavoriteController implements FavoriteDocs {
 
     @GetMapping("/{favoriteId}")
     public ResponseEntity<FavoriteResponse> getById(@PathVariable Long favoriteId) {
-        FavoriteResponse favoriteResponse = favoriteService.getVote(favoriteId);
+        FavoriteResponse favoriteResponse = favoriteService.getFavorite(favoriteId);
         return ResponseEntity.ok(favoriteResponse);
     }
 

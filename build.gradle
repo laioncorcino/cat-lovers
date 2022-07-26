@@ -28,8 +28,9 @@ dependencies {
 	implementation 'mysql:mysql-connector-java'
 	implementation 'org.mapstruct:mapstruct:1.5.1.Final'
 	implementation 'org.mapstruct:mapstruct-processor:1.5.1.Final'
+    testImplementation 'org.projectlombok:lombok:1.18.22'
 
-	compileOnly 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
 
 	annotationProcessor 'org.projectlombok:lombok'
 	annotationProcessor 'org.mapstruct:mapstruct:1.5.1.Final'
