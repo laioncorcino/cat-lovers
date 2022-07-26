@@ -58,7 +58,7 @@ public class FavoriteService {
         }
     }
 
-    public FavoriteResponse getVote(Long voteId) {
+    public FavoriteResponse getFavorite(Long voteId) {
         Favorite favorite = getFavoriteById(voteId);
         return favorite_mapper.toResponse(favorite);
     }
