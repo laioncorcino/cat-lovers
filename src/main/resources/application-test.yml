@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/favorite_test
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    show_sql: true
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/rating_test
+
+breed:
+  api:
+    url: http://localhost:9999/api/v1/breed
+cat:
+  api:
+    key: api-key-test
