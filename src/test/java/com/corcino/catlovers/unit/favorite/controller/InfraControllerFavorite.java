@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(controllers = FavoriteController.class)
 @AutoConfigureMockMvc
-public abstract class ControllerFavoriteTest {
+public abstract class InfraControllerFavorite {
 
     protected static final String FAVORITE_API = "http://localhost:8080/api/v1/favorite";
 
@@ -43,6 +43,5 @@ public abstract class ControllerFavoriteTest {
     protected Pageable buildPageable() {
         return PageRequest.of(0, 10, Sort.Direction.ASC, "favoriteId");
     }
-
 
 }

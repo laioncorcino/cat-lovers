@@ -43,7 +43,7 @@ public class RatingService {
     private void checkEvaluate(RatingRequest ratingRequest) {
         Optional<RatingDocument> optionalRating = ratingRepository.findByBreedDocument_Id(ratingRequest.getBreedId());
         if (optionalRating.isPresent()) {
-            throw new BadRequestException("Voce já avaliou este gato");
+            throw new BadRequestException("Voce já avaliou este gato - " + optionalRating.get().getBreedDocument().getName());
         }
     }
 
