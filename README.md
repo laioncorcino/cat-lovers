@@ -11,9 +11,9 @@ O domínio de rating é salvo em banco não relacional - Mongo
 
 # Para subir a aplicação 
 
-* Executar a task startdbmysql  ./gradle startdbmysql no diretório da api cat-lovers para subir um container docker do mysql
+* Executar a task startdbmysql  ``` ./gradle startdbmysql ``` no diretório da api cat-lovers para subir um container docker do mysql
 
-* Executar a task startdbmongo  ./gradle startdbmongo no diretório da api cat-lovers para subir um container docker do mongo
+* Executar a task startdbmongo  ``` ./gradle startdbmongo ``` no diretório da api cat-lovers para subir um container docker do mongo
 
 # Para rodar todos os testes
 
