@@ -1,4 +1,4 @@
-package com.corcino.catlovers.unit.favorite.util;
+package com.corcino.catlovers.unit.favorite.builder;
 
 import com.corcino.catlovers.domain.breed.dto.BreedResponse;
 import com.corcino.catlovers.domain.breed.dto.ImageResponse;
@@ -33,11 +33,6 @@ public class FavoriteCreator {
 
     public static FavoriteResponse buildFavoriteResponseAegan() {
         Favorite favorite = buildFavoriteAegan();
-        return favorite_mapper.toResponse(favorite);
-    }
-
-    public static FavoriteResponse buildFavoriteResponseArabian() {
-        Favorite favorite = buildFavoriteArabian();
         return favorite_mapper.toResponse(favorite);
     }
 

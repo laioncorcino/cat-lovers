@@ -1,11 +1,10 @@
 package com.corcino.catlovers.unit.favorite.controller;
 
-import com.corcino.catlovers.domain.breed.service.BreedService;
 import com.corcino.catlovers.domain.favorite.dto.FavoriteRequest;
 import com.corcino.catlovers.domain.favorite.dto.ListFavoriteResponse;
 import com.corcino.catlovers.domain.favorite.service.FavoriteService;
 import com.corcino.catlovers.error.exception.NotFoundException;
-import com.corcino.catlovers.unit.favorite.util.JsonUtil;
+import com.corcino.catlovers.unit.util.JsonUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -19,22 +18,19 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import java.util.Arrays;
 import java.util.List;
 
-import static com.corcino.catlovers.unit.favorite.util.FavoriteCreator.*;
+import static com.corcino.catlovers.unit.favorite.builder.FavoriteCreator.*;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class FavoriteControllerTest extends ControllerFavoriteTest {
+public class FavoriteControllerTest extends InfraControllerFavorite {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
     private FavoriteService favoriteService;
-
-    @MockBean
-    private BreedService breedService;
 
     @Test
     @DisplayName("deve_retornar_lista_paginada_de_favoritos")

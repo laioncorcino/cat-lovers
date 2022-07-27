@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static com.corcino.catlovers.unit.favorite.util.FavoriteCreator.*;
+import static com.corcino.catlovers.unit.favorite.builder.FavoriteCreator.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.junit.jupiter.api.Assertions.assertFalse;

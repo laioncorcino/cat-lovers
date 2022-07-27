@@ -29,8 +29,8 @@ public class FavoriteSystemTest extends FavoriteInfraTest {
     }
 
     @Test
-    @DisplayName("deve_retornar_lista_de_racas")
-    public void listBreeds() {
+    @DisplayName("deve_retornar_lista_de_favoritos")
+    public void listFavorites() {
         populateDatabase();
 
         ResponseEntity<PageableResponse<ListFavoriteResponse>> getResponse = doGet();
@@ -125,6 +125,7 @@ public class FavoriteSystemTest extends FavoriteInfraTest {
     @DisplayName("deve_deletar_favorito")
     public void deleteFavorite() {
         populateDatabase();
+
         ResponseEntity<String> postResponse = doPost(new FavoriteRequest("mala", 1));
         String postResource = extractUrlContext(postResponse);
 
