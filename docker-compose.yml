@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  app:
+    environment:
+      SPRING_DATA_MYSQL_URL: jdbc:mysql://localhost:3306/favorite
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/rating
+    build: .
+    networks:
+      - cat_lovers
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+      - mongo
+  mysql:
+    networks:
+      - cat_lovers
+    image: "mysql:5.7"
+    ports:
+      - "3306:3306"
+  mongo:
+    networks:
+      -   cat_lovers
+    image: "mongo:3.7"
+    ports:
+      - "27017:27017"
+
+networks:
+  cat_lovers:
