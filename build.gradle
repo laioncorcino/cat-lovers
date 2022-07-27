@@ -43,3 +43,56 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+task startdbmysql(dependsOn:'stopdbmysql') {
+	description "Create database docker mysql"
+
+	doLast {
+		try {
+			exec {commandLine 'docker', 'run', '--name', 'favorite',  '-p',  '3306:3306', '-d', 'mysql:5.7', '-e', 'MYSQL_ROOT_PASSWORD=root'}
+			println 'Database containers started'
+		} catch (Exception ignored) {
+			exec {commandLine 'docker', 'start', 'favorite'}
+		}
+	}
+}
+
+
+task startdbmongo(dependsOn:'stopdbmongo') {
+	description "Create database docker mongo"
+
+	doLast {
+		try {
+			exec {commandLine 'docker', 'run', '--name', 'rating',  '-p',  '27017:27017', '-d', 'mongo'}
+			println 'Database containers started'
+		} catch (Exception ignored) {
+			exec {commandLine 'docker', 'start', 'rating'}
+		}
+	}
+}
+
+task stopdbmysql() {
+	description "Stop database docker mysql"
+
+	doLast {
+		try {
+			exec {commandLine 'docker', 'stop', 'favorite'}
+			println "Database containers stopped"
+		} catch (Exception ignored) {
+			println "Failed to stop database containers"
+		}
+	}
+}
+
+task stopdbmongo() {
+	description "Stop database docker mongo"
+
+	doLast {
+		try {
+			exec {commandLine 'docker', 'stop', 'rating'}
+			println "Database containers stopped"
+		} catch (Exception ignored) {
+			println "Failed to stop database containers"
+		}
+	}
+}
